@@ -1,6 +1,7 @@
 {
   "name": "podai_frontend",
   "version": "0.1.0",
+  "homepage": "https://team-hashing.github.io/podAI_frontend",
   "private": true,
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
