@@ -32,3 +32,15 @@
       --text-color: #FFFFFF;
     }
   }
+
+  @media (max-width: 640px) {
+    .custom-class {
+      /* styles for mobile */
+    }
+  }
+
+  @media (min-width: 640px) and (max-width: 768px) {
+    .custom-class {
+      /* styles for tablets */
+    }
+  }

@@ -190,7 +190,7 @@ const ProfilePage = () => {
   };
 
   const SideMenu = () => (
-    <div className="w-min bg-gray-100 dark:bg-gray-800 p-4 space-y-2 border-r border-gray-200 dark:border-gray-700 h-min rounded-xl">
+    <div className="md:space-x-4 bg-gray-100 dark:bg-gray-800 p-4 space-y-2 border-r border-gray-200 dark:border-gray-700 h-min rounded-xl">
       <div className="flex items-center space-x-2 mb-6">
         <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
           <User className="w-6 h-6 text-white" />
@@ -200,43 +200,45 @@ const ProfilePage = () => {
           <p className="text-sm text-gray-600 dark:text-gray-400">{user.email}</p>
         </div>
       </div>
+      <div className='flex flex-row sm:flex-col justify-between'>
       <button
         onClick={() => setActiveSection('overview')}
-        className={`w-full text-left p-2 rounded ${activeSection === 'overview' ? 'bg-gray-200 dark:bg-gray-700' : ''}`}
+        className={`flex center items-center p-2 rounded ${activeSection === 'overview' ? 'bg-gray-200 dark:bg-gray-700' : ''}`}
       >
-        <User className="inline-block mr-2" size={18} /> Overview
+        <User className="inline-block md:mr-2" size={18} /> <span className='hidden md:block'>Overview</span>
       </button>
       <button
         onClick={() => setActiveSection('subscription')}
-        className={`w-full text-left p-2 rounded ${activeSection === 'subscription' ? 'bg-gray-200 dark:bg-gray-700' : ''}`}
+        className={`flex items-center p-2 rounded ${activeSection === 'subscription' ? 'bg-gray-200 dark:bg-gray-700' : ''}`}
       >
-        <BarChart className="inline-block mr-2" size={18} /> Subscription
+        <BarChart className="inline-block md:mr-2" size={18} /> <span className='hidden md:block'>Subscription</span>
       </button>
       <button
         onClick={() => setActiveSection('payment')}
-        className={`w-full text-left p-2 rounded ${activeSection === 'payment' ? 'bg-gray-200 dark:bg-gray-700' : ''}`}
+        className={`flex items-center p-2 rounded ${activeSection === 'payment' ? 'bg-gray-200 dark:bg-gray-700' : ''}`}
       >
-        <CreditCard className="inline-block mr-2" size={18} /> Payment
+        <CreditCard className="inline-block md:mr-2" size={18} /> <span className='hidden md:block'>Payment</span>
       </button>
       <button
         onClick={() => setActiveSection('settings')}
-        className={`w-full text-left p-2 rounded ${activeSection === 'settings' ? 'bg-gray-200 dark:bg-gray-700' : ''}`}
+        className={`flex items-center p-2 rounded ${activeSection === 'settings' ? 'bg-gray-200 dark:bg-gray-700' : ''}`}
       >
-        <Settings2 className="inline-block mr-2" size={18} /> Settings
+        <Settings2 className="inline-block md:mr-2" size={18} /><span className='hidden md:block'>Settings</span>
       </button>
       <button
         onClick={handleLogout}
-        className="w-full text-left p-2 rounded text-red-600 hover:bg-red-100 dark:hover:bg-red-900"
+        className="flex items-center p-2 rounded text-red-600 hover:bg-red-100 dark:hover:bg-red-900"
       >
-        <LogOut className="inline-block mr-2" size={18} /> Log Out
+        <LogOut className="inline-block md:mr-2" size={18} /><span className='hidden md:block'>Log Out</span>
       </button>
+      </div>
     </div>
   );
 
   const Overview = () => (
     <div>
       <h2 className="text-2xl font-bold mb-4">Overview</h2>
-      <div className="grid grid-cols-2 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
           <h3 className="font-semibold mb-2">Member Since</h3>
           <p>{new Date(user.metadata.creationTime).toLocaleDateString()}</p>
@@ -260,7 +262,7 @@ const ProfilePage = () => {
           You haven't created any podcasts yet. (Podcasts count: {podcasts.length})
         </p>
       ) : (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {podcasts.map(podcast => (
               <PodcastCard key={podcast.id} {...podcast} />
           ))}
@@ -281,7 +283,7 @@ const ProfilePage = () => {
           <p className="text-gray-600 dark:text-gray-400">Loading plans...</p>
         </div>
       ) : (
-        <div className="grid grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {plans.map((plan) => (
             <motion.div
               key={plan.id}
@@ -428,7 +430,7 @@ const ProfilePage = () => {
     return (
       <div>
         <h2 className="text-2xl font-bold mb-4">Payment Information</h2>
-        <div className="flex space-x-4 gap-10">
+        <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 gap-10">
           <div className="flex-1">
             <h3 className="text-lg font-semibold mb-4">Saved Credit Cards</h3>
             {savedCards.length > 0 ? (
@@ -655,9 +657,9 @@ const ProfilePage = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <div className="container mx-auto px-4 py-8">
-        <div className="flex">
+        <div className="flex flex-col md:flex-row">
           <SideMenu />
-          <div className="flex-grow ml-8">
+          <div className="flex-grow ml-0 md:ml-8">
             {activeSection === 'overview' && <Overview />}
             {activeSection === 'subscription' && <Subscription />}
             {activeSection === 'payment' && <Payment />}

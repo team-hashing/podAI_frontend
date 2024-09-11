@@ -96,10 +96,11 @@ const PlayerPage = () => {
   if (!currentPodcast) return null;
 
   return (
-    <div className="h-[calc(100vh-64px)] bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-4 flex">
+    <div className={`md:h-[calc(100vh-64px)] bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-4 flex flex-col ${window.innerWidth < 640 ? 'flex-col' : 'flex-row'}`}>
+      <div className={`flex ${window.innerWidth < 640 ? 'flex-col' : 'flex-row'}`}>
       <motion.div
-        className="flex flex-col"
-        animate={{ width: '75%' }}
+        className={`flex flex-col ${window.innerWidth < 640 ? 'w-full' : 'w-3/4'}`}
+        animate={{ width: window.innerWidth < 640 ? '100%' : '75%' }}
         transition={{ duration: 0.3 }}
       >
         <div className="flex justify-end space-x-4 mb-4">
@@ -140,12 +141,12 @@ const PlayerPage = () => {
               <img
                 src={currentPodcast.imageUrl || '/static/images/placeholder2.png'}
                 alt={currentPodcast.name}
-                className="w-64 h-64 object-cover rounded-lg shadow-md mb-6"
+                className="w-1/2 md:w-64 h-auto object-cover rounded-lg shadow-md mb-6"
               />
               <h1 className="text-3xl font-bold text-center mb-2">{currentPodcast.name}</h1>
               <p className="text-xl text-gray-600 dark:text-gray-400 text-center mb-2">{authorName}</p>
               <p className="text-sm text-gray-500 dark:text-gray-500 text-center">{currentPodcast.subject}</p>
-              <div className="w-1/2 mt-4  p-4 rounded-lg">
+              <div className="w-full md:w-2/3 mt-4  p-4 rounded-lg">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm">{formatTime(currentTime)}</span>
                   <span className="text-sm">{formatTime(duration)}</span>
@@ -190,7 +191,7 @@ const PlayerPage = () => {
         </AnimatePresence>
         {showScript && (
           <motion.div
-            className="flex-1 bg-white dark:bg-gray-800 rounded-lg p-4 overflow-y-auto"
+            className="bg-white dark:bg-gray-800 rounded-lg p-4 overflow-hidden h-[50vh]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
@@ -212,8 +213,8 @@ const PlayerPage = () => {
         )}
       </motion.div>
       <motion.div
-        className="ml-4 overflow-hidden flex flex-col"
-        animate={{ width: '25%', height: showScript ? 'calc(100% - 200px)' : '100%' }}
+        className={`md:ml-4 overflow-hidden flex flex-col ${window.innerWidth < 640 ? 'w-full' : 'w-1/4'}`}
+        animate={{ width: window.innerWidth < 640 ? '100%' : '25%', height: showScript ? 'calc(100% - 200px)' : '100%' }}
         transition={{ duration: 0.3 }}
       >
         <div className=' bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden h-max'>
@@ -240,12 +241,11 @@ const PlayerPage = () => {
           ))}
         </div>
         </div>
+        </motion.div>
+        </div>
         {showScript && (
           <motion.div
-            className="bg-white dark:bg-gray-900 p-4 rounded-lg mt-4"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+            className="bg-white dark:bg-gray-900 p-4 rounded-lg mt-4 fixed bottom-0 left-0 w-screen"
           >
             <div className="flex items-center mb-4">
               <img
@@ -298,7 +298,6 @@ const PlayerPage = () => {
             </div>
           </motion.div>
         )}
-      </motion.div>
     </div>
   );
 };

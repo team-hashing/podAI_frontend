@@ -226,7 +226,7 @@ const LandingPage = () => {
         </motion.section>
 
         <motion.section className="mb-20" {...fadeInUp}>
-          <h2 className="text-3xl font-bold mb-8 text-center">Create a Podcast in 3 Simple Steps</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 text-center">Create a Podcast in 3 Simple Steps</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { icon: Type, title: "1. Enter Your Idea", description: "Type in your podcast topic or concept. That's all we need to get started." },

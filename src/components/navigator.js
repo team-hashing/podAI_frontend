@@ -24,6 +24,8 @@ const Navigator = () => {
     return !hiddenPaths.includes(location.pathname);
   };
 
+  const isMobile = window.innerWidth < 768; // Adjust the breakpoint as needed
+
   useEffect(() => {
     const performSearch = () => {
       if (searchQuery.length > 0) {
@@ -45,49 +47,99 @@ const Navigator = () => {
   return (
     <nav className="sticky top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-sm">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <Link to="/" className="flex items-center">
-          <Logo />
-          <Title />
-        </Link>
-        {shouldShowSearchBar() && (
-          <div className="flex-1 mx-4 relative">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                if (e.target.value==''){
-                  navigate('/');
-                }
-              }}
-              placeholder="Search podcasts..."
-              className="w-full px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-white"
-            />
-            <Search className="w-5 h-5 absolute right-3 top-2.5 text-gray-400" />
-          </div>
-        )}
-        <div className="flex items-center space-x-4">
-          {user && (
-            <div className="flex items-center text-gray-600 dark:text-gray-300">
-              <Coins className="w-5 h-5 mr-2" />
-              <span>{tokenBalance} tokens</span>
+        {isMobile ? (
+          // Mobile Navigator
+          <div className="flex flex-col w-full">
+            <div className="flex items-center justify-between w-full mb-2">
+              
+            <Link to="/" className="flex items-center">
+              <Logo />
+              <Title />
+            </Link>
+              <div className="flex items-center justify-between">
+              <button 
+                onClick={toggleTheme} 
+                className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+              >
+                {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
+              {user ? (
+                <UserProfile />
+              ) : (
+                <>
+                  {location.pathname !== '/authenticate' && <LoginRegister />}
+                  <Contact />
+                </>
+              )}
             </div>
-          )}
-          <button 
-            onClick={toggleTheme} 
-            className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-          >
-            {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-          </button>
-          {user ? (
-            <UserProfile />
-          ) : (
-            <>
-              {location.pathname !== '/authenticate' && <LoginRegister />}
-              <Contact />
-            </>
-          )}
-        </div>
+            </div>
+            {shouldShowSearchBar() && (
+              <div className="relative mb-2">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    if (e.target.value == '') {
+                      navigate('/');
+                    }
+                  }}
+                  placeholder="Search podcasts..."
+                  className="w-full px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-white"
+                />
+                <Search className="w-5 h-5 absolute right-3 top-2.5 text-gray-400" />
+              </div>
+            )}
+            
+          </div>
+        ) : (
+          // Desktop Navigator
+          <>
+            <Link to="/" className="flex items-center">
+              <Logo />
+              <Title />
+            </Link>
+            {shouldShowSearchBar() && (
+              <div className="flex-1 mx-4 relative">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    if (e.target.value == '') {
+                      navigate('/');
+                    }
+                  }}
+                  placeholder="Search podcasts..."
+                  className="w-full px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-white"
+                />
+                <Search className="w-5 h-5 absolute right-3 top-2.5 text-gray-400" />
+              </div>
+            )}
+            <div className="flex items-center space-x-4">
+              {user && (
+                <div className="flex items-center text-gray-600 dark:text-gray-300">
+                  <Coins className="w-5 h-5 mr-2" />
+                  <span>{tokenBalance} tokens</span>
+                </div>
+              )}
+              <button 
+                onClick={toggleTheme} 
+                className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+              >
+                {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
+              {user ? (
+                <UserProfile />
+              ) : (
+                <>
+                  {location.pathname !== '/authenticate' && <LoginRegister />}
+                  <Contact />
+                </>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </nav>
   );
