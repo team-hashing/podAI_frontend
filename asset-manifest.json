@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/podAI_frontend/static/css/main.b0689abf.css",
-    "main.js": "/podAI_frontend/static/js/main.89a452f2.js",
+    "main.css": "/podAI_frontend/static/css/main.e8ae4fb1.css",
+    "main.js": "/podAI_frontend/static/js/main.123b72c6.js",
     "static/js/453.c2d674c7.chunk.js": "/podAI_frontend/static/js/453.c2d674c7.chunk.js",
     "index.html": "/podAI_frontend/index.html",
-    "main.b0689abf.css.map": "/podAI_frontend/static/css/main.b0689abf.css.map",
-    "main.89a452f2.js.map": "/podAI_frontend/static/js/main.89a452f2.js.map",
+    "main.e8ae4fb1.css.map": "/podAI_frontend/static/css/main.e8ae4fb1.css.map",
+    "main.123b72c6.js.map": "/podAI_frontend/static/js/main.123b72c6.js.map",
     "453.c2d674c7.chunk.js.map": "/podAI_frontend/static/js/453.c2d674c7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b0689abf.css",
-    "static/js/main.89a452f2.js"
+    "static/css/main.e8ae4fb1.css",
+    "static/js/main.123b72c6.js"
   ]
 }
